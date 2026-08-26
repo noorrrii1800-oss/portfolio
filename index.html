@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor Fatima — Graphic Designer &amp; Front-End Developer</title>
+<meta name="description" content="Portfolio of Noor Fatima, Graphic Designer and Front-End Web Developer based in Rawalpindi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0D;
+    --bg-soft:#141416;
+    --surface: rgba(255,255,255,0.045);
+    --surface-strong: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.09);
+    --purple:#8B5CF6;
+    --blue:#3B82F6;
+    --white:#F5F5F7;
+    --muted:#9A9AA4;
+    --grad: linear-gradient(120deg,var(--purple),var(--blue));
+    --font-display:'Sora',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'Space Mono',monospace;
+    --radius:18px;
+  }
+  html.light{
+    --bg:#F6F5F9;
+    --bg-soft:#FFFFFF;
+    --surface: rgba(13,13,13,0.035);
+    --surface-strong: rgba(13,13,13,0.06);
+    --border: rgba(13,13,13,0.09);
+    --white:#0D0D0D;
+    --muted:#5B5B66;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    transition:background .4s ease,color .4s ease;
+  }
+  ::selection{background:var(--purple);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--purple);
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--purple);}
+  h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-0.01em;}
+  .container{max-width:1180px;margin:0 auto;padding:0 32px;}
+  section{padding:120px 0;position:relative;}
+  .glass{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+  .grad-text{
+    background:var(--grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:100px;
+    font-family:var(--font-body);font-weight:600;font-size:.92rem;
+    cursor:pointer;border:1px solid var(--border);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,background .3s ease;
+    background:var(--surface);
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(139,92,246,.25);}
+  .btn.primary{background:var(--grad);border:none;color:#fff;}
+  .btn.primary:hover{box-shadow:0 12px 34px rgba(59,130,246,.35);}
+
+  /* ---------- scroll progress ---------- */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--grad);z-index:9999;width:0%;}
+
+  /* ---------- cursor glow ---------- */
+  #glow{
+    position:fixed;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(139,92,246,.14),transparent 70%);
+    pointer-events:none;z-index:1;transform:translate(-50%,-50%);
+    transition:opacity .3s ease;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    padding:18px 0;
+    transition:background .3s ease,border-color .3s ease,padding .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled{background:rgba(13,13,13,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:12px 0;}
+  html.light nav.scrolled{background:rgba(246,245,249,.8);}
+  nav .container{display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:var(--font-display);font-weight:800;font-size:1.25rem;}
+  .logo span{color:var(--purple);}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-size:.9rem;font-weight:500;color:var(--muted);position:relative;padding:4px 0;}
+  .nav-links a.active,.nav-links a:hover{color:var(--white);}
+  .nav-links a.active::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--grad);border-radius:2px;}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
+  #themeToggle{
+    width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:1.1rem;border:1px solid var(--border);background:var(--surface);
+  }
+  #menuBtn{display:none;font-size:1.4rem;cursor:pointer;background:none;border:none;color:var(--white);}
+  .mobile-menu{
+    display:none;position:fixed;top:0;right:0;bottom:0;width:78%;max-width:320px;
+    background:var(--bg-soft);border-left:1px solid var(--border);z-index:1100;
+    padding:100px 30px 30px;flex-direction:column;gap:26px;transform:translateX(100%);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{font-size:1.05rem;font-weight:600;}
+  .menu-close{position:absolute;top:26px;right:26px;font-size:1.5rem;cursor:pointer;}
+
+  /* ---------- hero ---------- */
+  #hero{
+    min-height:100vh;display:flex;align-items:center;padding-top:140px;
+    position:relative;overflow:hidden;
+  }
+  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;z-index:0;animation:float 14s ease-in-out infinite;}
+  .blob1{width:420px;height:420px;background:var(--purple);top:-100px;right:-60px;}
+  .blob2{width:360px;height:360px;background:var(--blue);bottom:-80px;left:-100px;animation-delay:-6s;}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-40px) scale(1.08);}}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;position:relative;z-index:2;}
+  .hero-tag{display:inline-flex;gap:8px;align-items:center;padding:8px 16px;border-radius:100px;font-size:.8rem;margin-bottom:26px;}
+  .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px #4ADE80;}
+  h1.hero-title{font-size:clamp(2.4rem,5vw,3.9rem);font-weight:800;line-height:1.05;margin-bottom:20px;}
+  .role-line{font-family:var(--font-mono);font-size:clamp(1rem,2vw,1.3rem);color:var(--muted);margin-bottom:26px;height:1.6em;}
+  .role-line #typed{color:var(--white);border-right:2px solid var(--purple);padding-right:4px;}
+  .hero-desc{max-width:520px;color:var(--muted);font-size:1.05rem;line-height:1.7;margin-bottom:38px;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:50px;}
+  .hero-stats{display:flex;gap:40px;}
+  .hero-stats div b{display:block;font-family:var(--font-display);font-size:1.6rem;}
+  .hero-stats div span{font-size:.8rem;color:var(--muted);}
+  .hero-visual{position:relative;height:460px;display:flex;align-items:center;justify-content:center;}
+  .avatar-ring{
+    width:300px;height:300px;border-radius:50%;
+    background:conic-gradient(from 0deg,var(--purple),var(--blue),var(--purple));
+    display:flex;align-items:center;justify-content:center;
+    animation:spin 12s linear infinite;position:relative;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .avatar-inner{
+    width:270px;height:270px;border-radius:50%;background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:800;font-size:4rem;
+    animation:spin-rev 12s linear infinite;
+  }
+  @keyframes spin-rev{to{transform:rotate(-360deg);}}
+  .float-chip{
+    position:absolute;padding:10px 16px;font-size:.8rem;font-weight:600;
+    display:flex;align-items:center;gap:8px;animation:bob 5s ease-in-out infinite;
+  }
+  .chip1{top:6%;left:0;animation-delay:0s;}
+  .chip2{bottom:10%;right:-4%;animation-delay:-2s;}
+  .chip3{top:48%;left:-10%;animation-delay:-3.5s;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+  /* ---------- section heads ---------- */
+  .head{max-width:640px;margin-bottom:60px;}
+  .head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:700;}
+  .head p{color:var(--muted);margin-top:14px;font-size:1.02rem;line-height:1.6;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start;}
+  .about-card{padding:36px;text-align:center;}
+  .about-card .avatar-sm{
+    width:140px;height:140px;border-radius:28px;margin:0 auto 20px;
+    background:var(--grad);display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:800;font-size:2.6rem;color:#fff;
+  }
+  .about-card h3{font-size:1.2rem;margin-bottom:4px;}
+  .about-card p.role{color:var(--muted);font-size:.9rem;margin-bottom:20px;}
+  .info-row{display:flex;justify-content:space-between;font-size:.85rem;padding:10px 0;border-top:1px solid var(--border);color:var(--muted);}
+  .info-row b{color:var(--white);font-weight:500;}
+  .about-text p{color:var(--muted);line-height:1.8;margin-bottom:18px;}
+  .timeline-mini{margin-top:26px;display:flex;flex-direction:column;gap:18px;}
+  .timeline-mini .item{padding-left:22px;border-left:2px solid var(--border);position:relative;}
+  .timeline-mini .item::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--purple);}
+  .timeline-mini .item b{font-size:.95rem;}
+  .timeline-mini .item span{display:block;font-size:.78rem;color:var(--muted);margin-top:2px;}
+  .stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
+  .stat-strip .glass{padding:26px 18px;text-align:center;}
+  .stat-strip b{font-family:var(--font-display);font-size:2rem;display:block;}
+  .stat-strip span{font-size:.8rem;color:var(--muted);}
+
+  /* ---------- skills ---------- */
+  .skills-cols{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+  .skill-card{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;transition:transform .3s ease,border-color .3s ease;}
+  .skill-card:hover{transform:translateX(6px);border-color:var(--purple);}
+  .skill-bar-track{width:110px;height:6px;border-radius:6px;background:var(--surface-strong);overflow:hidden;}
+  .skill-bar-fill{height:100%;border-radius:6px;background:var(--grad);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1);}
+  .skills-cols h4{font-size:1rem;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;font-family:var(--font-mono);}
+
+  /* ---------- services ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .service-card{padding:30px 26px;transition:transform .35s ease,border-color .3s ease;}
+  .service-card:hover{transform:translateY(-8px);border-color:var(--purple);}
+  .service-card .ic{font-size:1.6rem;margin-bottom:16px;width:52px;height:52px;border-radius:14px;background:var(--surface-strong);display:flex;align-items:center;justify-content:center;}
+  .service-card h4{font-size:1.05rem;margin-bottom:8px;}
+  .service-card p{color:var(--muted);font-size:.88rem;line-height:1.6;}
+
+  /* ---------- portfolio ---------- */
+  .filters{display:flex;gap:10px;margin-bottom:36px;flex-wrap:wrap;}
+  .filter-btn{padding:9px 20px;border-radius:100px;font-size:.85rem;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font-body);}
+  .filter-btn.active{background:var(--grad);color:#fff;border:none;}
+  .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .project-card{overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1);}
+  .project-card:hover{transform:translateY(-6px);}
+  .project-thumb{height:200px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--surface-strong);}
+  .project-thumb span.tag{position:absolute;top:12px;left:12px;z-index:2;font-size:.7rem;padding:5px 12px;border-radius:100px;background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(6px);font-family:var(--font-mono);}
+  .project-thumb .glyph{font-size:2.6rem;opacity:.85;}
+  .project-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s cubic-bezier(.2,.8,.2,1);cursor:zoom-in;}
+  .project-card:hover .project-thumb img{transform:scale(1.08);}
+  .project-body{padding:22px 22px 26px;}
+  .project-body h4{font-size:1.05rem;margin-bottom:6px;}
+  .project-body p{color:var(--muted);font-size:.85rem;line-height:1.55;margin-bottom:14px;}
+  .tech-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .tech-row span{font-size:.68rem;padding:4px 10px;border-radius:100px;background:var(--surface-strong);color:var(--muted);}
+  .proj-links{display:flex;gap:10px;}
+  .proj-links a{font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:100px;border:1px solid var(--border);}
+  .proj-links a:hover{border-color:var(--purple);}
+  .project-card[data-cat="graphic"] .project-thumb{background:var(--grad);}
+  .project-card[data-cat="web"] .project-thumb{background:linear-gradient(135deg,var(--bg-soft),var(--surface-strong));}
+  .hide{display:none !important;}
+
+  /* ---------- testimonials ---------- */
+  .test-wrap{position:relative;max-width:760px;margin:0 auto;text-align:center;}
+  .test-slide{display:none;padding:44px 40px;}
+  .test-slide.active{display:block;animation:fadein .6s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .test-slide p.quote{font-size:1.15rem;line-height:1.7;font-style:italic;margin-bottom:24px;}
+  .test-slide .stars{color:var(--purple);margin-bottom:16px;letter-spacing:3px;}
+  .test-slide b{display:block;}
+  .test-slide span{color:var(--muted);font-size:.85rem;}
+  .test-dots{display:flex;justify-content:center;gap:8px;margin-top:24px;}
+  .test-dots i{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;}
+  .test-dots i.active{background:var(--purple);width:22px;border-radius:6px;}
+
+  /* ---------- process ---------- */
+  .process-track{display:flex;justify-content:space-between;position:relative;flex-wrap:wrap;gap:30px;}
+  .process-track::before{content:"";position:absolute;top:26px;left:0;right:0;height:1px;background:var(--border);}
+  .process-step{flex:1;min-width:140px;text-align:center;position:relative;z-index:1;}
+  .process-step .num{
+    width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+    font-family:var(--font-mono);font-size:.9rem;
+  }
+  .process-step.active .num{background:var(--grad);border:none;color:#fff;}
+  .process-step h4{font-size:.92rem;}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;}
+  .contact-info .item{display:flex;gap:16px;align-items:flex-start;margin-bottom:26px;}
+  .contact-info .ic{width:44px;height:44px;border-radius:12px;background:var(--surface-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .contact-info b{display:block;font-size:.92rem;}
+  .contact-info span{color:var(--muted);font-size:.85rem;}
+  .social-row{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+  .social-row a{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);}
+  .social-row a:hover{border-color:var(--purple);}
+  form.glass{padding:36px;display:flex;flex-direction:column;gap:16px;}
+  form input,form textarea{
+    background:var(--surface-strong);border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;color:var(--white);font-family:var(--font-body);font-size:.92rem;
+  }
+  form textarea{resize:vertical;min-height:110px;}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--purple);}
+  .form-note{font-size:.8rem;color:var(--muted);}
+
+  /* ---------- footer ---------- */
+  footer{padding:60px 0 30px;border-top:1px solid var(--border);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+  .footer-grid h4{font-size:.85rem;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+  .footer-grid ul li{margin-bottom:10px;font-size:.9rem;}
+  .footer-grid ul li a:hover{color:var(--purple);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:.82rem;color:var(--muted);padding-top:26px;border-top:1px solid var(--border);}
+  #toTop{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* ---------- fade-in on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);}
+  .reveal.show{opacity:1;transform:translateY(0);}
+
+  /* ---------- loader ---------- */
+  #loader{position:fixed;inset:0;background:#0D0D0D;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease;}
+  #loader.hidden{opacity:0;visibility:hidden;}
+  .loader-mark{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:.02em;}
+  .loader-mark span{color:var(--purple);}
+  .loader-bar{width:160px;height:2px;background:rgba(255,255,255,.1);margin-top:18px;overflow:hidden;border-radius:2px;}
+  .loader-bar i{display:block;height:100%;width:0%;background:var(--grad);animation:load 1.1s ease forwards;}
+  @keyframes load{to{width:100%;}}
+
+  @media(max-width:900px){
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;}
+    .hero-visual{height:280px;order:-1;}
+    .avatar-ring{width:200px;height:200px;}
+    .avatar-inner{width:176px;height:176px;font-size:2.6rem;}
+    .skills-cols,.services-grid,.projects-grid{grid-template-columns:1fr;}
+    .stat-strip{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    #menuBtn{display:block;}
+    .mobile-menu{display:flex;}
+    section{padding:80px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div id="loader"><div style="text-align:center;"><div class="loader-mark">NOOR<span>.</span>FATIMA</div><div class="loader-bar"><i></i></div></div></div>
+<div id="progress"></div>
+<div id="glow"></div>
+
+<nav id="navbar">
+  <div class="container">
+    <a href="#hero" class="logo">Noor<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <div id="themeToggle" title="Toggle theme">🌙</div>
+      <a href="#contact" class="btn primary" style="padding:10px 20px;font-size:.85rem;">Hire Me</a>
+      <button id="menuBtn">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="menu-close" id="menuClose">✕</div>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#process">Process</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-tag glass"><span class="dot"></span> Available for freelance work</div>
+      <h1 class="hero-title">Hi, I'm <span class="grad-text">Noor Fatima</span></h1>
+      <div class="role-line">I am a <span id="typed"></span></div>
+      <p class="hero-desc">I design visually appealing graphics and build modern, responsive websites that deliver exceptional user experiences — blending creative design with clean, front-end code.</p>
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn primary">View Portfolio</a>
+        <a href="images/Noor_Fatima_CV.pdf" class="btn" id="resumeBtn" download="Noor_Fatima_CV.pdf">⬇️ Download CV</a>
+        <a href="#contact" class="btn">Contact Me</a>
+      </div>
+      <div class="hero-stats">
+        <div><b class="counter" data-target="18">0</b><span>Projects Completed</span></div>
+        <div><b class="counter" data-target="8">0</b><span>Happy Clients</span></div>
+        <div><b class="counter" data-target="3">0</b><span>Years Learning</span></div>
+        <div><b class="counter" data-target="12">0</b><span>Technologies</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-chip glass chip1">🎨 Graphic Design</div>
+      <div class="float-chip glass chip2">💻 Front-End Dev</div>
+      <div class="float-chip glass chip3">⚡ Problem Solver</div>
+      <div class="avatar-ring"><div class="avatar-inner">NF</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">About Me</div>
+      <h2>Designing visuals, building interfaces.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-card glass reveal">
+        <div class="avatar-sm">NF</div>
+        <h3>Noor Fatima</h3>
+        <p class="role">Graphic Designer &amp; Front-End Developer</p>
+        <div class="info-row"><span>Location</span><b>Rawalpindi, PK</b></div>
+        <div class="info-row"><span>Email</span><b>noorrrii1800@gmail.com</b></div>
+        <div class="info-row"><span>Phone</span><b>0340 6111002</b></div>
+        <div class="info-row"><span>Freelance</span><b>Open to work</b></div>
+        <a href="images/Noor_Fatima_CV.pdf" class="btn primary" download="Noor_Fatima_CV.pdf" style="margin-top:22px;justify-content:center;width:100%;">⬇️ Download CV</a>
+      </div>
+      <div class="about-text reveal">
+        <p>I'm a Computer Science student and freelance graphic designer who enjoys turning ideas into polished visuals and functional, responsive websites. My work sits at the intersection of design and code — I care as much about how an interface looks as how it behaves.</p>
+        <p>Outside of freelance design work, I tutor junior students and build real-world software projects, from a smart home alarm system to encryption tools, which keeps my problem-solving sharp and my curiosity active.</p>
+        <div class="timeline-mini">
+          <div class="item"><b>Bachelor of Computer Science — Air University</b><span>2024 – Present · CGPA 3.5/4.0</span></div>
+          <div class="item"><b>Graphic Designer — Freelance</b><span>Nov 2023 – Present</span></div>
+          <div class="item"><b>Tutor — Home Tuition</b><span>Dec 2021 – Present</span></div>
+          <div class="item"><b>APSACS — Intermediate &amp; Matriculation</b><span>2010 – 2022</span></div>
+        </div>
+        <div class="stat-strip">
+          <div class="glass"><b class="counter" data-target="18">0</b><span>Projects</span></div>
+          <div class="glass"><b class="counter" data-target="8">0</b><span>Happy Clients</span></div>
+          <div class="glass"><b class="counter" data-target="3">0</b><span>Yrs Learning</span></div>
+          <div class="glass"><b class="counter" data-target="12">0</b><span>Tech Used</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Skills</div>
+      <h2>What I bring to a project.</h2>
+    </div>
+    <div class="skills-cols">
+      <div class="reveal">
+        <h4>Graphic Design</h4>
+        <div class="skill-card glass" data-level="90"><span>Adobe Photoshop</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="85"><span>Adobe Illustrator</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="92"><span>Canva</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="80"><span>Figma</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="88"><span>Logo &amp; Brand Identity</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="86"><span>Social Media Design</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+      </div>
+      <div class="reveal">
+        <h4>Web Development</h4>
+        <div class="skill-card glass" data-level="90"><span>HTML5 &amp; CSS3</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="82"><span>JavaScript</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="78"><span>Bootstrap</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="70"><span>React</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="65"><span>Node.js &amp; Express</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+        <div class="skill-card glass" data-level="75"><span>Git &amp; GitHub</span><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Services</div>
+      <h2>How I can help your brand.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card glass reveal"><div class="ic">🏷️</div><h4>Logo &amp; Branding</h4><p>Distinct logo marks and full brand identity systems built to be recognisable anywhere.</p></div>
+      <div class="service-card glass reveal"><div class="ic">📱</div><h4>Social Media Design</h4><p>Scroll-stopping posts, carousels and story templates tailored to your platform.</p></div>
+      <div class="service-card glass reveal"><div class="ic">🖨️</div><h4>Print &amp; Marketing</h4><p>Business cards, posters, flyers and banners designed for print-ready delivery.</p></div>
+      <div class="service-card glass reveal"><div class="ic">🌐</div><h4>Portfolio Websites</h4><p>Personal and professional portfolio sites that convert visitors into clients.</p></div>
+      <div class="service-card glass reveal"><div class="ic">🚀</div><h4>Landing Pages</h4><p>High-converting single pages for products, launches and campaigns.</p></div>
+      <div class="service-card glass reveal"><div class="ic">🛠️</div><h4>Website Redesign</h4><p>Modernising outdated sites into fast, responsive, accessible experiences.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Portfolio</div>
+      <h2>Selected work &amp; live demos.</h2>
+      <p>A mix of live front-end builds and applied software projects from my coursework and freelance work.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web Development</button>
+      <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card glass reveal" data-cat="web">
+        <div class="project-thumb"><span class="tag">Live Demo</span><img src="images/savory.png" alt="The Savory Bistro restaurant website screenshot" loading="lazy"></div>
+        <div class="project-body">
+          <h4>The Savory Bistro</h4>
+          <p>Premium fine-dining restaurant site with reservation flow and elegant dark editorial styling.</p>
+          <div class="tech-row"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <div class="proj-links">
+            <a href="https://noorrrii1800-oss.github.io/web-portfolio/" target="_blank">🔗 Live Demo</a>
+            <a href="https://github.com/noorrrii1800-oss/web-portfolio" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="web">
+        <div class="project-thumb"><span class="tag">Live Demo</span><img src="images/xenon-fit.png" alt="Xenon Fitness gym website screenshot" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Xenon Fitness</h4>
+          <p>High-energy gym landing page with bold typography and a dark, athletic aesthetic.</p>
+          <div class="tech-row"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <div class="proj-links">
+            <a href="https://noorrrii1800-oss.github.io/web-portfolio/gym.html" target="_blank">🔗 Live Demo</a>
+            <a href="https://github.com/noorrrii1800-oss/web-portfolio" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="web">
+        <div class="project-thumb"><span class="tag">Live Demo</span><img src="images/real-estate.png" alt="Vanguard Estates real estate website screenshot" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Vanguard Estates</h4>
+          <p>Luxury real-estate site for a fictional brokerage, styled around trust and high-end positioning.</p>
+          <div class="tech-row"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <div class="proj-links">
+            <a href="https://noorrrii1800-oss.github.io/web-portfolio/realestate.html" target="_blank">🔗 Live Demo</a>
+            <a href="https://github.com/noorrrii1800-oss/web-portfolio" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="web">
+        <div class="project-thumb"><span class="tag">Case Study</span><img src="images/smart-home.jpeg" alt="Pro Smart Home Alarm System hardware prototype" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Pro Smart Home Alarm System</h4>
+          <p>Designed and implemented the interface and logic for a smart home alarm system — 1st Prize winner.</p>
+          <div class="tech-row"><span>C++</span><span>Systems Design</span></div>
+          <div class="proj-links"><a href="#contact">✉️ Request Details</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="web">
+        <div class="project-thumb"><span class="tag">Case Study</span><img src="images/ride-sharing.png" alt="SwiftRide ride sharing system dashboard screenshot" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Ride Sharing System</h4>
+          <p>Front-end modules for a ride-sharing application, focused on clean booking flows.</p>
+          <div class="tech-row"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <div class="proj-links"><a href="#contact">✉️ Request Details</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="web">
+        <div class="project-thumb"><span class="tag">Case Study</span><img src="images/voice-encryption.png" alt="CyberCrypt Pro encryption tool interface screenshot" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Voice &amp; Text Encryption</h4>
+          <p>Basic encryption algorithms built for secure text and voice communication.</p>
+          <div class="tech-row"><span>Java</span><span>Python</span></div>
+          <div class="proj-links"><a href="#contact">✉️ Request Details</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Menu Design</span><img src="images/Chinese-Food-%20Menu%20.jpg" alt="Chinese Food restaurant menu design" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Chinese Food — Restaurant Menu</h4>
+          <p>Dark, elegant portrait menu layout with a custom food-cover logo mark.</p>
+          <div class="tech-row"><span>Canva</span><span>Layout Design</span></div>
+          <div class="proj-links"><a href="images/Chinese-Food-%20Menu%20.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Flyer</span><img src="images/Cosmetic%20-%20Flyer.png" alt="Cosmetic skincare product mockup flyer" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Cosmetic Product Mockup Flyer</h4>
+          <p>Skincare promo flyer built around a clean product mockup and soft, minimal typography.</p>
+          <div class="tech-row"><span>Photoshop</span><span>Mockup Design</span></div>
+          <div class="proj-links"><a href="images/Cosmetic%20-%20Flyer.png" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Logo</span><img src="images/jwelzio-logo.png" alt="Jewelzio jewelry brand logo" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Jewelzio — Brand Logo</h4>
+          <p>Ring-and-gem monogram logo designed for a jewelry brand identity.</p>
+          <div class="tech-row"><span>Illustrator</span><span>Logo Design</span></div>
+          <div class="proj-links"><a href="images/jwelzio-logo.png" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Logo</span><img src="images/gamig-logo.png" alt="Eagle and gaming brand logo concepts" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Eagle &amp; Gaming Logo Concepts</h4>
+          <p>Two contrasting logo marks — a bold eagle emblem and a modern esports-style monogram.</p>
+          <div class="tech-row"><span>Illustrator</span><span>Vector Art</span></div>
+          <div class="proj-links"><a href="images/gamig-logo.png" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Trifold Brochure</span><img src="images/Food%20Fusion%20(2).jpg" alt="Pizza restaurant trifold brochure menu" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Pizza Restaurant Trifold Menu</h4>
+          <p>Dark slate-textured trifold brochure with a full pizza menu and pricing.</p>
+          <div class="tech-row"><span>Canva</span><span>Print Design</span></div>
+          <div class="proj-links"><a href="images/Food%20Fusion%20(2).jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Trifold Brochure</span><img src="images/Food%20Fusion.jpg" alt="Food Fusion restaurant trifold brochure" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Food Fusion — Restaurant Brochure</h4>
+          <p>Trifold brochure with about, contact and branding sections for a fictional food brand.</p>
+          <div class="tech-row"><span>Canva</span><span>Branding</span></div>
+          <div class="proj-links"><a href="images/Food%20Fusion.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Social Post</span><img src="images/food-fusion-ad.jpg" alt="Food Fusion promotional social media post" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Food Fusion — Promo Post</h4>
+          <p>Bold "50% Off" promotional ad post styled around a rustic steak platter photo.</p>
+          <div class="tech-row"><span>Photoshop</span><span>Ad Design</span></div>
+          <div class="proj-links"><a href="images/food-fusion-ad.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Trifold Brochure</span><img src="images/Golden%20Spoon%20.jpg" alt="Golden Spoon Chinese restaurant trifold brochure" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Golden Spoon — Trifold Brochure</h4>
+          <p>Playful green-toned trifold brochure with mascot illustrations for a Chinese restaurant brand.</p>
+          <div class="tech-row"><span>Canva</span><span>Illustration</span></div>
+          <div class="proj-links"><a href="images/Golden%20Spoon%20.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Brochure</span><img src="images/golden%20Spoon%202.jpg" alt="Golden Spoon quality food brochure" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Golden Spoon — Quality Food Layout</h4>
+          <p>Three-panel promotional layout highlighting quality, healthy food and an order CTA.</p>
+          <div class="tech-row"><span>Canva</span><span>Layout Design</span></div>
+          <div class="proj-links"><a href="images/golden%20Spoon%202.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Banner</span><img src="images/golden-spoon%20-banner.jpg" alt="Golden Spoon Chinese food festival banner" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Golden Spoon — Food Festival Banner</h4>
+          <p>Wide promotional banner for a Chinese food festival, built around illustrated dish icons.</p>
+          <div class="tech-row"><span>Canva</span><span>Banner Design</span></div>
+          <div class="proj-links"><a href="images/golden-spoon%20-banner.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Social Post</span><img src="images/car-rentanl-post.jpg" alt="Car rental Instagram post design" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Car Rental — Instagram Post</h4>
+          <p>Red-and-silver automotive Instagram post promoting a car rental service.</p>
+          <div class="tech-row"><span>Canva</span><span>Social Media</span></div>
+          <div class="proj-links"><a href="images/car-rentanl-post.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Poster</span><img src="images/Fitness%20-%20Poster.jpg" alt="Fitness and gym transformation poster" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Fit &amp; Fine — Gym Poster</h4>
+          <p>High-contrast red, black and white poster promoting a fitness membership.</p>
+          <div class="tech-row"><span>Canva</span><span>Poster Design</span></div>
+          <div class="proj-links"><a href="images/Fitness%20-%20Poster.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+      <div class="project-card glass reveal" data-cat="graphic">
+        <div class="project-thumb"><span class="tag">Web UI</span><img src="images/digital-deals-logo%20.jpg" alt="Digital Deals brand page design" loading="lazy"></div>
+        <div class="project-body">
+          <h4>Digital Deals — Brand Page</h4>
+          <p>Sharp geometric "D" logo mark and dark branded page design.</p>
+          <div class="tech-row"><span>Figma</span><span>UI Design</span></div>
+          <div class="proj-links"><a href="images/digital-deals-logo%20.jpg" target="_blank">🔍 View Full Size</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="head reveal" style="margin:0 auto 50px;text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Testimonials</div>
+      <h2>What clients say.</h2>
+    </div>
+    <div class="test-wrap reveal">
+      <div class="test-slide active glass">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Noor delivered our brand identity ahead of schedule and it looked more premium than what we'd paid an agency for.</p>
+        <b>Ayesha K.</b><span>Small Business Owner</span>
+      </div>
+      <div class="test-slide glass">
+        <div class="stars">★★★★★</div>
+        <p class="quote">The website Noor built for us was fast, clean, and exactly matched the mood board we shared.</p>
+        <b>Bilal R.</b><span>Startup Founder</span>
+      </div>
+      <div class="test-slide glass">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Great communication throughout and the social media designs consistently outperformed our older posts.</p>
+        <b>Sana M.</b><span>Marketing Lead</span>
+      </div>
+      <div class="test-dots">
+        <i class="active" data-i="0"></i><i data-i="1"></i><i data-i="2"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Process</div>
+      <h2>How a project comes together.</h2>
+    </div>
+    <div class="process-track reveal">
+      <div class="process-step active"><div class="num">01</div><h4>Discussion</h4></div>
+      <div class="process-step"><div class="num">02</div><h4>Planning</h4></div>
+      <div class="process-step"><div class="num">03</div><h4>Design</h4></div>
+      <div class="process-step"><div class="num">04</div><h4>Development</h4></div>
+      <div class="process-step"><div class="num">05</div><h4>Testing</h4></div>
+      <div class="process-step"><div class="num">06</div><h4>Delivery</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="head reveal">
+      <div class="eyebrow">Contact</div>
+      <h2>Let's build something great.</h2>
+      <p>Have a project in mind? Send a message and I'll get back within a day.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="item"><div class="ic">✉️</div><div><b>Email</b><span>noorrrii1800@gmail.com</span></div></div>
+        <div class="item"><div class="ic">📞</div><div><b>Phone</b><span>0340 6111002</span></div></div>
+        <div class="item"><div class="ic">📍</div><div><b>Location</b><span>Chaklala Gracylines, Rawalpindi</span></div></div>
+        <div class="social-row">
+          <a href="https://github.com/noorrrii1800-oss" target="_blank" title="GitHub">GH</a>
+          <a href="#" target="_blank" title="LinkedIn">in</a>
+          <a href="#" target="_blank" title="Fiverr">Fv</a>
+          <a href="#" target="_blank" title="Behance">Be</a>
+          <a href="#" target="_blank" title="Instagram">Ig</a>
+        </div>
+      </div>
+      <form class="glass reveal" id="contactForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <textarea placeholder="Tell me about your project..." required></textarea>
+        <button type="submit" class="btn primary" style="justify-content:center;">Send Message</button>
+        <div class="form-note" id="formNote"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;">Noor<span>.</span></div>
+        <p style="color:var(--muted);font-size:.9rem;max-width:280px;line-height:1.6;">Graphic Designer &amp; Front-End Developer crafting clean visuals and modern, responsive websites.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul><li><a href="#services">Logo &amp; Branding</a></li><li><a href="#services">Social Media Design</a></li><li><a href="#services">Portfolio Websites</a></li><li><a href="#services">Landing Pages</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noor Fatima. All rights reserved.</span>
+      <div id="toTop" class="glass">↑</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // loader
+  window.addEventListener('load',()=>{
+    setTimeout(()=>document.getElementById('loader').classList.add('hidden'),500);
+  });
+
+  // scroll progress + nav scrolled state + active link
+  const progress = document.getElementById('progress');
+  const nav = document.getElementById('navbar');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',()=>{
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    progress.style.width = scrolled+'%';
+    nav.classList.toggle('scrolled', h.scrollTop>40);
+
+    let current='';
+    sections.forEach(sec=>{
+      const top = sec.offsetTop-140;
+      if(h.scrollTop>=top) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href')==='#'+current);
+    });
+  });
+
+  // cursor glow
+  const glow = document.getElementById('glow');
+  document.addEventListener('mousemove',e=>{
+    glow.style.left = e.clientX+'px';
+    glow.style.top = e.clientY+'px';
+  });
+
+  // theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click',()=>{
+    document.documentElement.classList.toggle('light');
+    themeToggle.textContent = document.documentElement.classList.contains('light') ? '☀️' : '🌙';
+  });
+
+  // mobile menu
+  const menuBtn=document.getElementById('menuBtn'), mobileMenu=document.getElementById('mobileMenu'), menuClose=document.getElementById('menuClose');
+  menuBtn.addEventListener('click',()=>mobileMenu.classList.add('open'));
+  menuClose.addEventListener('click',()=>mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
+
+  // typing effect
+  const roles = ["Graphic Designer","Front-End Web Developer","Creative Problem Solver"];
+  const typedEl = document.getElementById('typed');
+  let ri=0, ci=0, deleting=false;
+  function typeLoop(){
+    const word = roles[ri];
+    typedEl.textContent = deleting ? word.substring(0,ci--) : word.substring(0,ci++);
+    let speed = deleting ? 40 : 80;
+    if(!deleting && ci===word.length+1){ speed=1400; deleting=true; }
+    else if(deleting && ci===0){ deleting=false; ri=(ri+1)%roles.length; speed=300; }
+    setTimeout(typeLoop,speed);
+  }
+  typeLoop();
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('show'); });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // animated counters
+  const counters = document.querySelectorAll('.counter');
+  const cio = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const el = en.target;
+        const target = +el.dataset.target;
+        let cur = 0;
+        const step = Math.max(1, target/40);
+        const timer = setInterval(()=>{
+          cur += step;
+          if(cur>=target){ cur=target; clearInterval(timer); }
+          el.textContent = Math.floor(cur);
+        },30);
+        cio.unobserve(el);
+      }
+    });
+  },{threshold:0.4});
+  counters.forEach(c=>cio.observe(c));
+
+  // skill bars
+  const skillCards = document.querySelectorAll('.skill-card');
+  const sio = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const fill = en.target.querySelector('.skill-bar-fill');
+        fill.style.width = en.target.dataset.level+'%';
+        sio.unobserve(en.target);
+      }
+    });
+  },{threshold:0.4});
+  skillCards.forEach(c=>sio.observe(c));
+
+  // portfolio filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      projectCards.forEach(card=>{
+        card.classList.toggle('hide', f!=='all' && card.dataset.cat!==f);
+      });
+    });
+  });
+
+  // testimonial slider
+  const slides = document.querySelectorAll('.test-slide');
+  const dots = document.querySelectorAll('.test-dots i');
+  let ti=0;
+  function showSlide(i){
+    slides.forEach(s=>s.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('active'));
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+    ti=i;
+  }
+  dots.forEach(d=>d.addEventListener('click',()=>showSlide(+d.dataset.i)));
+  setInterval(()=>showSlide((ti+1)%slides.length),5000);
+
+  // process active step follow scroll
+  const steps = document.querySelectorAll('.process-step');
+  const pio = new IntersectionObserver(entries=>{
+    entries.forEach((en,idx)=>{ if(en.isIntersecting) en.target.classList.add('active'); });
+  },{threshold:0.6});
+  steps.forEach(s=>pio.observe(s));
+
+  // back to top
+  document.getElementById('toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // contact form (static demo — no backend)
+  document.getElementById('contactForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    document.getElementById('formNote').textContent = 'Thanks! This is a demo form — connect it to Formspree/EmailJS to receive messages.';
+    e.target.reset();
+  });
+
+</script>
+</body>
+</html>
